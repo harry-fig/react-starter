@@ -29,7 +29,7 @@ function Filters(props: FiltersProps) {
   }
 
   return (
-    <div className="border border-stone-300 rounded-full overflow-hidden mx-auto">
+    <div className="mx-auto overflow-hidden border rounded-full border-stone-300">
       {filterDiv}
     </div>
   );
