@@ -1,5 +1,5 @@
 import { Task, TaskListProps } from "../models/app.models";
-import Todo from "./Todo";
+import Todo from "./todo.component";
 
 function TaskList(props: TaskListProps) {
 

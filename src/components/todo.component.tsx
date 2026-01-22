@@ -1,4 +1,4 @@
-import { BaseSyntheticEvent, useEffect, useState } from "react";
+import { BaseSyntheticEvent, useState } from "react";
 import { Task, TodoProps } from "../models/app.models";
 
 function Todo(props: TodoProps) {
@@ -27,7 +27,7 @@ function Todo(props: TodoProps) {
 
   return (
     <li className="flex items-center gap-8 p-2 rounded-sm bg-stone-100">
-      <div className="flex gap-2 items-center w-full">
+      <div className="flex items-center w-full gap-2">
         <input
           id={props.task.id}
           type="checkbox"
@@ -50,7 +50,7 @@ function Todo(props: TodoProps) {
           value={newName}
         />
       </div>
-      <div className="flex gap-2 items-center">
+      <div className="flex items-center gap-2">
         <button
           hidden={isEdit}
           type="button"

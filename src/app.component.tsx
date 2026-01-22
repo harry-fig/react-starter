@@ -1,12 +1,11 @@
 import { useEffect, useState } from "react";
-import Filters from "./components/Filters";
-import Form from "./components/Form";
-import TaskList from "./components/TaskList";
+import Filters from "./components/filters.component";
+import Form from "./components/form.component";
+import TaskList from "./components/task-list.component";
 import { FilterOptions, FiltersMap, Tasks } from "./constants/data.const";
 import { FilterName, Task } from "./models/app.models";
 
 function App() {
-  const [newTaskName, setNewTaskName] = useState("");
   const [selectedFilter, setSelectedFilter] = useState(FilterOptions[0]);
   const [tasks, setTasks] = useState(Tasks);
   const [filteredTasks, setFilteredTasks] = useState(() => tasks.filter(FiltersMap[selectedFilter]));
@@ -28,7 +27,6 @@ function App() {
       setTasks((prevTasks) => {
         return [newTask, ...prevTasks];
       });
-      setNewTaskName(name);
     }
   }
 
