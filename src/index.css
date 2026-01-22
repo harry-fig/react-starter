@@ -1,0 +1,48 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.btn {
+  @apply px-4 py-2 text-[11px] uppercase font-bold rounded;
+}
+
+.btn:not([disabled]) {
+  @apply cursor-pointer hover:opacity-80 transition duration-150;
+}
+
+.btn:disabled {
+  @apply cursor-not-allowed bg-stone-500 text-stone-700 opacity-50;
+}
+
+.btn.btn-primary:not([disabled]) {
+  @apply bg-blue-500 text-white hover:bg-blue-700;
+}
+
+.btn.btn-error:not([disabled]) {
+  @apply bg-red-500 text-white hover:bg-red-700;
+}
+
+.btn.btn-toggle:not([aria-pressed="true"]):not([disabled]) {
+  @apply bg-stone-100 text-stone-500 hover:text-stone-700;
+}
+.btn.btn-toggle[aria-pressed="true"]:not([disabled]) {
+  @apply bg-blue-100 text-blue-500 hover:text-blue-700;
+}
+
+input[type="checkbox"] {
+  @apply w-6 h-6;
+}
+
+.input {
+  @apply px-4 py-2 rounded;
+}
+
+.input:not([disabled]) {
+  @apply border border-stone-300;
+}
+
+.input:not([disabled]):focus,
+.btn:not([disabled]):focus,
+input[type="checkbox"]:not([disabled]):focus {
+  @apply outline-2 outline-blue-300;
+}
