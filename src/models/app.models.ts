@@ -11,8 +11,11 @@ export interface AppProps {
 }
 
 export interface TaskListProps {
-  newTaskName: string;
-  selectedFilter: FilterName;
+  filteredTasks: Task[];
+  toggleTaskCompletedCallback: (task: Task) => Task;
+  editTaskCallback: (task: Task) => Task;
+  deleteTaskCallback: (task: Task) => Task;
+
 }
 
 export interface FormProps {
