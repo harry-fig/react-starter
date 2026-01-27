@@ -12,9 +12,9 @@ export interface AppProps {
 
 export interface TaskListProps {
   filteredTasks: Task[];
-  toggleTaskCompletedCallback: (task: Task) => Task;
-  editTaskCallback: (task: Task) => Task;
-  deleteTaskCallback: (task: Task) => Task;
+  toggleTaskCompletedCallback: (task: Task) => void;
+  editTaskCallback: (task: Task) => void;
+  deleteTaskCallback: (task: Task) => void;
 
 }
 
@@ -30,7 +30,7 @@ export interface TodoProps {
 }
 
 export interface FiltersProps {
-  changeFilter: (filter: FilterName) => FilterName;
+  changeFilter: (filter: FilterName) => void;
 }
 
 export type FilterName = keyof typeof FiltersMap; // "All" | "Active" | "Completed"

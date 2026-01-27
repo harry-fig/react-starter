@@ -1,90 +1,35 @@
-import { useEffect, useState } from "react";
-import Filters from "./components/filters.component";
-import Form from "./components/form.component";
-import TaskList from "./components/task-list.component";
-import { FilterOptions, FiltersMap, Tasks } from "./constants/data.const";
-import { FilterName, Task } from "./models/app.models";
+import { Routes, Route, Link } from "react-router-dom";
+import HomePage from "./pages/home.page";
+import TasksPage from "./pages/tasks.page";
 
 function App() {
-  const [selectedFilter, setSelectedFilter] = useState(FilterOptions[0]);
-  const [tasks, setTasks] = useState(Tasks);
-  const [filteredTasks, setFilteredTasks] = useState(() => tasks.filter(FiltersMap[selectedFilter]));
-
-  useEffect(() => {
-    setFilteredTasks(() => tasks.filter(FiltersMap[selectedFilter]));
-  }, [tasks]);
-
-  function handleAddTask(name: string) {
-    if (name) {
-      const newTask = {
-        id: `${name.toLowerCase().split(' ').join('-')}-${Math.floor(
-          Math.random() * 100000
-        )}`,
-        name: name,
-        completed: false,
-      };
-
-      setTasks((prevTasks) => {
-        return [newTask, ...prevTasks];
-      });
-    }
-  }
-
-  function handleChangeFilter(selectedFilter: FilterName): FilterName {
-    setSelectedFilter(selectedFilter);
-    setFilteredTasks(() => tasks.filter(FiltersMap[selectedFilter]));
-    return selectedFilter;
-  }
-
-  function handleToggleTaskCompleted(task: Task): Task {
-    const updatedTasks: Task[] = tasks.map((t) => {
-      if (task.id === t.id) {
-        return { ...task, completed: !task.completed };
-      }
-      return t;
-    });
-
-    if (updatedTasks) {
-      setTasks(updatedTasks);
-    }
-    return task;
-  }
-
-  function handleEditTask(task: Task): Task {
-    const updatedTasks = tasks.map((t) => {
-      if (t.id === task.id && t.name !== task.name) {
-        t = task;
-      }
-      return t;
-    });
-
-    if (updatedTasks) {
-      setTasks(updatedTasks);
-    }
-    return task;
-  }
-
-  function handleDeleteTask(task: Task): Task {
-    const updatedTasks: Task[] = tasks.filter((t) => t.id !== task.id);
-
-    if (updatedTasks) {
-      setTasks(updatedTasks);
-    }
-    return task;
-  }
-
   return (
-    <section className="flex flex-col w-full h-full p-8">
-      <div className="flex flex-col w-full h-full max-w-screen-lg gap-10 p-8 mx-auto">
-        <h1 className="text-xl font-bold">TodoMatic</h1>
-        <Form addTask={handleAddTask} />
-        <Filters changeFilter={handleChangeFilter} />
-        <TaskList toggleTaskCompletedCallback={handleToggleTaskCompleted}
-          editTaskCallback={handleEditTask}
-          deleteTaskCallback={handleDeleteTask}
-          filteredTasks={filteredTasks} />
-      </div>
-    </section>
+    <div className="flex flex-col w-full h-screen">
+      <nav className="bg-gray-800 text-white shadow-md">
+        <div className="max-w-screen-lg mx-auto px-8 py-4">
+          <div className="flex items-center justify-between">
+            <Link to="/" className="text-xl font-bold hover:text-gray-300 transition-colors">
+              TodoMatic
+            </Link>
+            <div className="flex gap-6">
+              <Link to="/" className="hover:text-gray-300 transition-colors">
+                Home
+              </Link>
+              <Link to="/tasks" className="hover:text-gray-300 transition-colors">
+                Tasks
+              </Link>
+            </div>
+          </div>
+        </div>
+      </nav>
+      
+      <main className="flex-1 overflow-auto">
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/tasks" element={<TasksPage />} />
+        </Routes>
+      </main>
+    </div>
   );
 }
 
